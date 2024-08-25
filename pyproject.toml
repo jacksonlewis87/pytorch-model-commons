@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "pytorch-model-commons"
+version = "0.1.0"
+description = ""
+authors = ["Jackson Lewis"]
+readme = "README.md"
+packages = [{include = "pytorch-model-commons"}]
+
+[tool.pytest.ini_options]
+pythonpath = ["pytorch-model-commons"]
+testspath = ["tests"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pytorch-lightning = "~2.0.4"
+torch = "~2.0.1"
+
+matplotlib = "^3.9.0"
+[tool.poetry.group.dev.dependencies]
+pytest = "~7.3.0"
+pre-commit = "^3.7.1"
+black = "^24.4.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 120
