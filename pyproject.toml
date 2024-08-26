@@ -4,11 +4,12 @@ version = "0.1.0"
 description = ""
 authors = ["Jackson Lewis"]
 readme = "README.md"
-packages = [{include = "pytorch-model-commons"}]
+packages = [{include = "pytorch_model_commons"}]
 
 [tool.pytest.ini_options]
-pythonpath = ["pytorch-model-commons"]
+pythonpath = ["pytorch_model_commons"]
 testspath = ["tests"]
+addopts = "-p no:cacheprovider"
 
 [tool.poetry.dependencies]
 python = "^3.10"
