@@ -3,9 +3,9 @@ from dataclasses import dataclass, field
 from enum import Enum
 from typing import Tuple, Type
 
-from model.configs.transformer.attention_configs import AttentionConfig, CausalSelfAttentionConfig
-from model.transformer.attention import CausalSelfAttention, ScaledDotProductSelfAttention
-from utils import dict_to_dataclass
+from pytorch_model_commons.model.configs.transformer.attention_configs import AttentionConfig, CausalSelfAttentionConfig
+from pytorch_model_commons.model.transformer.attention import CausalSelfAttention, ScaledDotProductSelfAttention
+from pytorch_model_commons.utils import dict_to_dataclass
 
 
 class AttentionType(Enum):

@@ -1,6 +1,6 @@
 from torch import tensor
 
-from loss.loss_wrappers import BaseLossWrapper
+from pytorch_model_commons.loss.loss_wrappers import BaseLossWrapper
 
 
 def test_base_loss_wrapper():

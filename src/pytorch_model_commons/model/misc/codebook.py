@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 
-from model.configs.misc.codebook_configs import CodebookConfig
+from pytorch_model_commons.model.configs.misc.codebook_configs import CodebookConfig
 
 
 class Codebook(nn.Module):

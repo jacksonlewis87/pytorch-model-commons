@@ -1,4 +1,4 @@
-from model.configs.transformer.attention_configs import AttentionConfig, CausalSelfAttentionConfig
+from pytorch_model_commons.model.configs.transformer.attention_configs import AttentionConfig, CausalSelfAttentionConfig
 
 
 def test_attention_config():

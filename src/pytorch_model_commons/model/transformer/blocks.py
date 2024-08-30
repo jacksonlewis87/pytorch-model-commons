@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 
-from model.configs.transformer.block_configs import TransformerBlockConfig
+from pytorch_model_commons.model.configs.transformer.block_configs import TransformerBlockConfig
 
 
 class TransformerBlock(nn.Module):

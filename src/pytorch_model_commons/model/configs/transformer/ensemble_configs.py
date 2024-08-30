@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 
-from model.configs.transformer.block_configs import AttentionType, TransformerBlockConfig
+from pytorch_model_commons.model.configs.transformer.block_configs import AttentionType, TransformerBlockConfig
 
 
 @dataclass

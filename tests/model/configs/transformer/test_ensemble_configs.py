@@ -1,5 +1,5 @@
-from model.configs.transformer.block_configs import AttentionType, TransformerBlockConfig
-from model.configs.transformer.ensemble_configs import GPTConfig, TransformerModuleConfig
+from pytorch_model_commons.model.configs.transformer.block_configs import AttentionType, TransformerBlockConfig
+from pytorch_model_commons.model.configs.transformer.ensemble_configs import GPTConfig, TransformerModuleConfig
 
 
 def test_gpt_config():

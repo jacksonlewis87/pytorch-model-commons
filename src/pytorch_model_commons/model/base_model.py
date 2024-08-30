@@ -2,8 +2,8 @@ import torch
 import pytorch_lightning as pl
 from dataclasses import fields
 
-from loss.loss_wrappers import BaseLossWrapper
-from model.model_configs import ModelConfig
+from pytorch_model_commons.loss.loss_wrappers import BaseLossWrapper
+from pytorch_model_commons.model.model_configs import ModelConfig
 
 
 class BasePLModule(pl.LightningModule):

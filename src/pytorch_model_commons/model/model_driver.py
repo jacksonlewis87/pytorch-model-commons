@@ -6,7 +6,7 @@ from datetime import datetime
 from pytorch_lightning.loggers import TensorBoardLogger
 from typing import List
 
-from model.model_configs import FullConfig
+from pytorch_model_commons.model.model_configs import FullConfig
 
 
 class ModelDriver:

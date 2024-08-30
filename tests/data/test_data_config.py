@@ -1,4 +1,4 @@
-from data.data_config import DataConfig
+from pytorch_model_commons.data.data_config import DataConfig
 
 
 def test_data_config():

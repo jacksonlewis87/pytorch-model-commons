@@ -2,8 +2,8 @@ import pytest
 import torch
 from unittest.mock import MagicMock, patch
 
-from model.transformer.ensemble import GPT, TransformerModule
-from model.configs.transformer.ensemble_configs import GPTConfig, TransformerModuleConfig
+from pytorch_model_commons.model.transformer.ensemble import GPT, TransformerModule
+from pytorch_model_commons.model.configs.transformer.ensemble_configs import GPTConfig, TransformerModuleConfig
 
 
 class DummyTransformerBlock(torch.nn.Module):
@@ -27,7 +27,7 @@ def gpt_config():
 
 
 @pytest.fixture
-@patch("model.transformer.ensemble.TransformerBlock", return_value=DummyTransformerBlock())
+@patch("pytorch_model_commons.model.transformer.ensemble.TransformerBlock", return_value=DummyTransformerBlock())
 def gpt(mock_transformer_block, gpt_config):
     return GPT(config=gpt_config)
 
@@ -92,7 +92,7 @@ def transformer_module_config():
 
 
 @pytest.fixture
-@patch("model.transformer.ensemble.TransformerBlock", return_value=DummyTransformerBlock())
+@patch("pytorch_model_commons.model.transformer.ensemble.TransformerBlock", return_value=DummyTransformerBlock())
 def transformer_module(mock_transformer_block, transformer_module_config):
     return TransformerModule(config=transformer_module_config)
 

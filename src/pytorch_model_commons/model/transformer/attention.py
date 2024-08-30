@@ -3,7 +3,7 @@ import torch
 import torch.nn as nn
 from torch.nn import functional as F
 
-from model.configs.transformer.attention_configs import CausalSelfAttentionConfig, AttentionConfig
+from pytorch_model_commons.model.configs.transformer.attention_configs import CausalSelfAttentionConfig, AttentionConfig
 
 
 class ScaledDotProductSelfAttention(nn.Module):

@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from data.data_config import DataConfig
+from pytorch_model_commons.data.data_config import DataConfig
 
 
 @dataclass

@@ -2,8 +2,8 @@ import torch
 import torch.nn as nn
 from typing import Optional, Tuple
 
-from model.configs.transformer.ensemble_configs import GPTConfig, TransformerModuleConfig
-from model.transformer.blocks import TransformerBlock
+from pytorch_model_commons.model.configs.transformer.ensemble_configs import GPTConfig, TransformerModuleConfig
+from pytorch_model_commons.model.transformer.blocks import TransformerBlock
 
 
 class GPT(nn.Module):
