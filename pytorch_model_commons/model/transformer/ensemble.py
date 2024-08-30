@@ -44,7 +44,6 @@ class GPT(nn.Module):
 
         self.block_size = config.block_size
         self.apply(self._init_weights)
-        self.config = config
 
     def _init_weights(self, module: nn.Module) -> None:
         """
@@ -139,7 +138,6 @@ class TransformerModule(nn.Module):
         self.proj_out = nn.Linear(self.hidden_dim, self.output_dim)
 
         self.apply(self._init_weights)
-        self.config = config
 
     def _init_weights(self, module: nn.Module) -> None:
         """

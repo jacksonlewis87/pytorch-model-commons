@@ -40,7 +40,6 @@ def test_gpt_initialization(gpt, gpt_config):
     assert isinstance(gpt.ln_f, torch.nn.LayerNorm)
     assert isinstance(gpt.head, torch.nn.Linear)
     assert gpt.block_size == gpt_config.block_size
-    assert gpt.config == gpt_config
 
 
 def test_gpt_weight_initialization(gpt):
@@ -108,7 +107,6 @@ def test_transformer_module_initialization(transformer_module, transformer_modul
     assert transformer_module.hidden_dim == transformer_module_config.hidden_dim
     assert transformer_module.output_dim == transformer_module_config.output_dim
     assert transformer_module.block_size == transformer_module_config.block_size
-    assert transformer_module.config == transformer_module_config
 
 
 def test_transformer_module_weight_initialization(transformer_module):
