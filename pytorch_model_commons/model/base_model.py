@@ -2,7 +2,7 @@ import torch
 import pytorch_lightning as pl
 from dataclasses import fields
 
-from loss.loss_config import LossConfig
+from loss.loss_wrappers import BaseLossWrapper
 from model.model_configs import ModelConfig
 
 
@@ -11,18 +11,18 @@ class BasePLModule(pl.LightningModule):
         super().__init__()
         self.config = config
 
-    def _log_losses(self, loss_config: LossConfig, stage: str):
+    def _log_losses(self, loss_wrapper: BaseLossWrapper, stage: str):
         """
         Logs the losses defined in the LossConfig dataclass.
 
         Args:
-            loss_config (LossConfig): An instance of LossConfig dataclass.
+            loss_wrapper (BaseLossWrapper): An instance of BaseLossWrapper dataclass.
             stage (str): The stage of training, e.g., "train" or "val".
         """
-        for loss in fields(loss_config):
+        for loss in fields(loss_wrapper):
             self.log(
                 f"{stage}_{loss.name}",
-                getattr(loss_config, loss.name),
+                getattr(loss_wrapper, loss.name),
                 on_step=stage == "train",
                 on_epoch=True,
                 prog_bar=True,

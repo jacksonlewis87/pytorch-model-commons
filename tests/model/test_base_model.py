@@ -7,7 +7,7 @@ from model.base_model import BasePLModule
 
 
 @dataclass
-class MockLossConfig:
+class MockLossWrapper:
     loss1: float
     loss2: float
 
@@ -23,15 +23,15 @@ def mock_config():
 
 
 @pytest.fixture
-def mock_loss_config():
-    return MockLossConfig(loss1=0.5, loss2=1.5)
+def mock_loss_wrapper():
+    return MockLossWrapper(loss1=0.5, loss2=1.5)
 
 
-def test_log_losses(mock_config, mock_loss_config):
+def test_log_losses(mock_config, mock_loss_wrapper):
     module = BasePLModule(config=mock_config)
     module.log = MagicMock()
 
-    module._log_losses(mock_loss_config, stage="train")
+    module._log_losses(mock_loss_wrapper, stage="train")
 
     module.log.assert_any_call("train_loss1", 0.5, on_step=True, on_epoch=True, prog_bar=True)
     module.log.assert_any_call("train_loss2", 1.5, on_step=True, on_epoch=True, prog_bar=True)
