@@ -13,8 +13,8 @@ addopts = "-p no:cacheprovider"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-pytorch-lightning = "~2.0.4"
-torch = "~2.0.1"
+pytorch-lightning = "~2.4.0"
+torch = "~2.4.0"
 
 matplotlib = "^3.9.0"
 [tool.poetry.group.dev.dependencies]
