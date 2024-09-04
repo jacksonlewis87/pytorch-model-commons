@@ -1,4 +1,4 @@
-from pytorch_model_commons.model.configs.misc.codebook_configs import CodebookConfig
+from model.configs.misc.codebook_configs import CodebookConfig
 
 
 def test_codebook_config():

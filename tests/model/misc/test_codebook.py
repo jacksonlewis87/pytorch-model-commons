@@ -1,8 +1,8 @@
 import pytest
 import torch
 
-from pytorch_model_commons.model.configs.misc.codebook_configs import CodebookConfig
-from pytorch_model_commons.model.misc.codebook import Codebook
+from model.configs.misc.codebook_configs import CodebookConfig
+from model.misc.codebook import Codebook
 
 
 @pytest.fixture

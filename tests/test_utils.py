@@ -1,7 +1,7 @@
 import unittest
 from dataclasses import dataclass
 
-from pytorch_model_commons.utils import dict_to_dataclass
+from utils import dict_to_dataclass
 
 
 @dataclass

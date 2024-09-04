@@ -2,8 +2,8 @@ import pytest
 import torch
 from unittest.mock import MagicMock
 
-from pytorch_model_commons.model.transformer.attention import CausalSelfAttention, ScaledDotProductSelfAttention
-from pytorch_model_commons.model.configs.transformer.attention_configs import AttentionConfig, CausalSelfAttentionConfig
+from model.transformer.attention import CausalSelfAttention, ScaledDotProductSelfAttention
+from model.configs.transformer.attention_configs import AttentionConfig, CausalSelfAttentionConfig
 
 
 @pytest.fixture

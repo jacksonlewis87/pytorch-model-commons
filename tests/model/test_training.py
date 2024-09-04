@@ -1,6 +1,6 @@
 from unittest.mock import Mock, patch
 
-from pytorch_model_commons.model.training import run_training
+from model.training import run_training
 
 
 class MockModel:
@@ -9,8 +9,8 @@ class MockModel:
         self.config = config
 
 
-@patch("pytorch_model_commons.model.training.ModelDriver")
-@patch("pytorch_model_commons.model.training.os.makedirs")
+@patch("model.training.ModelDriver")
+@patch("model.training.os.makedirs")
 def test_run_training(mock_makedirs, mock_model_driver):
     mock_config = Mock()
     mock_data_module = Mock()

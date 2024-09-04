@@ -2,8 +2,8 @@ import pytest
 import torch
 from unittest.mock import MagicMock
 
-from pytorch_model_commons.model.transformer.blocks import TransformerBlock
-from pytorch_model_commons.model.configs.transformer.block_configs import TransformerBlockConfig
+from model.transformer.blocks import TransformerBlock
+from model.configs.transformer.block_configs import TransformerBlockConfig
 
 
 class DummyAttention(torch.nn.Module):
