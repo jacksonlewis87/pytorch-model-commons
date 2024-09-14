@@ -8,4 +8,4 @@ Common code for model development, training, and evaluation in pytorch
 
 ## Creating new version
 * Commit changes locally (don't modify poetry version, this will happen automatically)
-* run `create_git_release` (documentation in [dev-utilities](https://github.com/jacksonlewis87/dev-utilities))
+* run `bash create_git_release` (documentation in [dev-utilities](https://github.com/jacksonlewis87/dev-utilities))

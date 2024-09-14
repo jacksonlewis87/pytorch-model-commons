@@ -1,9 +1,9 @@
 from unittest.mock import Mock, patch
 
-from model.configs.transformer.ensemble_configs import GPTConfig, TransformerModuleConfig
+from pytorch_model_commons.model.configs.transformer.ensemble_configs import GPTConfig, TransformerModuleConfig
 
 
-@patch("model.configs.transformer.ensemble_configs.TransformerBlockConfig")
+@patch("pytorch_model_commons.model.configs.transformer.ensemble_configs.TransformerBlockConfig")
 def test_gpt_config(mock_transformer_block_config):
     embedding_dim = 128
     vocab_size = 512
@@ -42,7 +42,7 @@ def test_gpt_config(mock_transformer_block_config):
     assert result.embed_drop_p == embed_drop_p
 
 
-@patch("model.configs.transformer.ensemble_configs.TransformerBlockConfig")
+@patch("pytorch_model_commons.model.configs.transformer.ensemble_configs.TransformerBlockConfig")
 def test_transformer_module_config(mock_transformer_block_config):
     input_dim = 64
     hidden_dim = 128

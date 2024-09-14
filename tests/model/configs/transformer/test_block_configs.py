@@ -1,7 +1,7 @@
 import pytest
 from unittest.mock import Mock, patch
 
-from model.configs.transformer.block_configs import (
+from pytorch_model_commons.model.configs.transformer.block_configs import (
     AttentionType,
     TransformerBlockConfig,
     get_attention_classes,
@@ -16,8 +16,10 @@ from model.configs.transformer.block_configs import (
     ],
 )
 def test_get_attention_classes(attention_type: AttentionType, expected_config_str: str, expected_module_str: str):
-    with patch(f"model.configs.transformer.block_configs.{expected_config_str}") as MockConfig, patch(
-        f"model.configs.transformer.block_configs.{expected_module_str}"
+    with patch(
+        f"pytorch_model_commons.model.configs.transformer.block_configs.{expected_config_str}"
+    ) as MockConfig, patch(
+        f"pytorch_model_commons.model.configs.transformer.block_configs.{expected_module_str}"
     ) as MockAttentionModule:
         config_class, module_class = get_attention_classes(attention_type)
 
@@ -30,8 +32,8 @@ def test_get_attention_classes_invalid():
         get_attention_classes("invalid_attention_type")
 
 
-@patch("model.configs.transformer.block_configs.get_attention_classes")
-@patch("model.configs.transformer.block_configs.dict_to_dataclass")
+@patch("pytorch_model_commons.model.configs.transformer.block_configs.get_attention_classes")
+@patch("pytorch_model_commons.model.configs.transformer.block_configs.dict_to_dataclass")
 def test_transformer_block_config(mock_dict_to_dataclass, mock_get_attention_classes):
     mock_0 = Mock()
     mock_1 = Mock()

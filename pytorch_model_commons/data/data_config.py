@@ -6,3 +6,4 @@ class DataConfig:
     input_path: str
     batch_size: int
     train_size: float
+    data_split_path: str

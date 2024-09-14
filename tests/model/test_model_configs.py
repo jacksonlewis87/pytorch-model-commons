@@ -1,19 +1,19 @@
 import pytest
 from unittest.mock import Mock, create_autospec, patch
 
-from model.model_configs import FullConfig, ModelConfig
+from pytorch_model_commons.model.model_configs import FullConfig, ModelConfig
 
 
 @pytest.fixture
 def mock_data_config():
-    with patch("model.model_configs.DataConfig") as MockDataConfig:
+    with patch("pytorch_model_commons.model.model_configs.DataConfig") as MockDataConfig:
         MockDataConfig.return_value = Mock()
         yield MockDataConfig.return_value
 
 
 @pytest.fixture
 def mock_model_config():
-    with patch("model.model_configs.ModelConfig") as MockModelConfig:
+    with patch("pytorch_model_commons.model.model_configs.ModelConfig") as MockModelConfig:
         MockModelConfig.return_value = create_autospec(ModelConfig)
         yield MockModelConfig.return_value
 
@@ -22,7 +22,6 @@ def mock_model_config():
 def full_config(mock_data_config, mock_model_config):
     return FullConfig(
         experiment_path="/path/to/experiment",
-        data_split_path="/path/to/data-split",
         data_config=mock_data_config,
         model_config=mock_model_config,
     )
@@ -30,7 +29,6 @@ def full_config(mock_data_config, mock_model_config):
 
 def test_full_config_initialization(full_config, mock_data_config, mock_model_config):
     assert full_config.experiment_path == "/path/to/experiment"
-    assert full_config.data_split_path == "/path/to/data-split"
     assert full_config.data_config == mock_data_config
     assert full_config.model_config == mock_model_config
 

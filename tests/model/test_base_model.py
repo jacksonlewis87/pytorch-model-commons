@@ -3,7 +3,7 @@ from unittest.mock import MagicMock, patch
 import torch
 from dataclasses import dataclass
 
-from model.base_model import BasePLModule
+from pytorch_model_commons.model.base_model import BasePLModule
 
 
 @dataclass
