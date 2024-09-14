@@ -13,5 +13,6 @@ class ModelConfig:
 @dataclass
 class FullConfig:
     experiment_path: str
+    data_split_path: str
     data_config: DataConfig
     model_config: ModelConfig

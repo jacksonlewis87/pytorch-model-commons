@@ -21,12 +21,16 @@ def mock_model_config():
 @pytest.fixture
 def full_config(mock_data_config, mock_model_config):
     return FullConfig(
-        experiment_path="/path/to/experiment", data_config=mock_data_config, model_config=mock_model_config
+        experiment_path="/path/to/experiment",
+        data_split_path="/path/to/data-split",
+        data_config=mock_data_config,
+        model_config=mock_model_config,
     )
 
 
 def test_full_config_initialization(full_config, mock_data_config, mock_model_config):
     assert full_config.experiment_path == "/path/to/experiment"
+    assert full_config.data_split_path == "/path/to/data-split"
     assert full_config.data_config == mock_data_config
     assert full_config.model_config == mock_model_config
 
