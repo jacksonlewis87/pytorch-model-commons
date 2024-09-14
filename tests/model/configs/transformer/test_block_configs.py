@@ -69,6 +69,6 @@ def test_transformer_block_config(mock_dict_to_dataclass, mock_get_attention_cla
 
     assert result.embedding_dim == embedding_dim
     assert result.resid_drop_p == resid_drop_p
-    assert result.attention_type == attention_type
+    assert result.attention_type == attention_type.value
     assert result.attention_module == mock_1
     assert result.attention_config == mock_dict_to_dataclass.return_value

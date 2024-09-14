@@ -26,7 +26,7 @@ def get_attention_classes(attention_type: AttentionType) -> Tuple[Type[Attention
 class TransformerBlockConfig:
     embedding_dim: int
     resid_drop_p: float
-    attention_type: AttentionType
+    attention_type: str
     attention_module: Type[nn.Module]
     attention_config: AttentionConfig = field(init=False)
 
@@ -41,7 +41,7 @@ class TransformerBlockConfig:
     ):
         self.embedding_dim = embedding_dim
         self.resid_drop_p = resid_drop_p
-        self.attention_type = attention_type
+        self.attention_type = attention_type.value
 
         attention_config_class, attention_module = get_attention_classes(attention_type=attention_type)
 
