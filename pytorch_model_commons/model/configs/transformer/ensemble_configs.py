@@ -42,8 +42,9 @@ class GPTConfig:
 
 @dataclass
 class TransformerModuleConfig:
-    embedding_dim: int
-    vocab_size: int
+    input_dim: int
+    hidden_dim: int
+    output_dim: int
     block_size: int
     num_layers: int
     embed_drop_p: float

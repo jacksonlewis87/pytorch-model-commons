@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pytorch-model-commons"
-version = "0.1.9"
+version = "0.1.10"
 description = "Common code for model development, training, and evaluation in pytorch"
 authors = ["Jackson Lewis"]
 readme = "README.md"
