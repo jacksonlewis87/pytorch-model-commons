@@ -37,7 +37,7 @@ def test_log_losses(mock_config, mock_loss_wrapper):
     module.log.assert_any_call("train_loss2", 1.5, on_step=True, on_epoch=True, prog_bar=True)
 
 
-@patch("model.base_model.torch.optim.Adam")
+@patch("pytorch_model_commons.model.base_model.torch.optim.Adam")
 def test_configure_optimizers(mock_adam, mock_config):
     module = BasePLModule(config=mock_config)
     module.parameters = MagicMock()

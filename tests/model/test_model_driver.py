@@ -44,7 +44,7 @@ def mock_tensorboard_logger():
 @pytest.fixture
 def model_driver(mock_full_config, mock_model, mock_data_module, mock_trainer, mock_tensorboard_logger):
     with patch("pytorch_model_commons.model.model_driver.os.makedirs") as MockMakedirs:
-        with patch("model.model_driver.json.dumps") as MockDumps:
+        with patch("pytorch_model_commons.model.model_driver.json.dumps") as MockDumps:
             return ModelDriver(full_config=mock_full_config, model=mock_model, data_module=mock_data_module)
 
 

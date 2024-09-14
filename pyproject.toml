@@ -1,13 +1,12 @@
 [tool.poetry]
 name = "pytorch-model-commons"
-version = "0.1.8"
+version = "0.1.9"
 description = "Common code for model development, training, and evaluation in pytorch"
 authors = ["Jackson Lewis"]
 readme = "README.md"
 packages = [{include = "pytorch_model_commons"}]
 
 [tool.pytest.ini_options]
-pythonpath = ["pytorch_model_commons"]
 testspath = ["tests"]
 addopts = "-p no:cacheprovider"
 
