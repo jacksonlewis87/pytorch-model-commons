@@ -1,9 +1,36 @@
 import pytest
 import torch
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, patch
 
-from pytorch_model_commons.model.transformer.attention import CausalSelfAttention, ScaledDotProductSelfAttention
-from pytorch_model_commons.model.configs.transformer.attention_configs import AttentionConfig, CausalSelfAttentionConfig
+from pytorch_model_commons.model.transformer.attention import (
+    CausalSelfAttention,
+    ScaledDotProductSelfAttention,
+    get_attention_module,
+)
+from pytorch_model_commons.model.configs.transformer.attention_configs import (
+    AttentionConfig,
+    AttentionType,
+    CausalSelfAttentionConfig,
+)
+
+
+@pytest.mark.parametrize(
+    "attention_type, expected_module_str",
+    [
+        (AttentionType.CAUSAL.value, "CausalSelfAttention"),
+        (AttentionType.STANDARD.value, "ScaledDotProductSelfAttention"),
+    ],
+)
+def test_get_attention_module(attention_type: str, expected_module_str: str):
+    with patch(f"pytorch_model_commons.model.transformer.attention.{expected_module_str}") as MockAttentionModule:
+        module_class = get_attention_module(attention_type=attention_type)
+
+        assert module_class == MockAttentionModule
+
+
+def test_get_attention_module_invalid():
+    with pytest.raises(ValueError, match="Unsupported attention type"):
+        get_attention_module(attention_type="invalid_attention_type")
 
 
 @pytest.fixture

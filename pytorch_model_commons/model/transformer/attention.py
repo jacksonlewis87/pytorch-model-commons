@@ -2,8 +2,22 @@ import math
 import torch
 import torch.nn as nn
 from torch.nn import functional as F
+from typing import Type
 
-from pytorch_model_commons.model.configs.transformer.attention_configs import CausalSelfAttentionConfig, AttentionConfig
+from pytorch_model_commons.model.configs.transformer.attention_configs import (
+    AttentionConfig,
+    AttentionType,
+    CausalSelfAttentionConfig,
+)
+
+
+def get_attention_module(attention_type: str) -> Type[nn.Module]:
+    if attention_type == AttentionType.CAUSAL.value:
+        return CausalSelfAttention
+    elif attention_type == AttentionType.STANDARD.value:
+        return ScaledDotProductSelfAttention
+    else:
+        raise ValueError(f"Unsupported attention type: {attention_type}")
 
 
 class ScaledDotProductSelfAttention(nn.Module):

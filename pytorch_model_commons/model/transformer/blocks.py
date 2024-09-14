@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 
+from pytorch_model_commons.model.transformer.attention import get_attention_module
 from pytorch_model_commons.model.configs.transformer.block_configs import TransformerBlockConfig
 
 
@@ -18,9 +19,11 @@ class TransformerBlock(nn.Module):
 
     def __init__(self, config: TransformerBlockConfig):
         super().__init__()
+        attention_module = get_attention_module(attention_type=config.attention_type)
+
         self.ln1 = nn.LayerNorm(config.embedding_dim)
         self.ln2 = nn.LayerNorm(config.embedding_dim)
-        self.attn = config.attention_module(config.attention_config)
+        self.attn = attention_module(config.attention_config)
         self.mlp = nn.Sequential(
             nn.Linear(config.embedding_dim, 4 * config.embedding_dim),
             nn.GELU(),

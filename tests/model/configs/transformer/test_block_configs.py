@@ -4,40 +4,34 @@ from unittest.mock import Mock, patch
 from pytorch_model_commons.model.configs.transformer.block_configs import (
     AttentionType,
     TransformerBlockConfig,
-    get_attention_classes,
+    get_attention_config_class,
 )
 
 
 @pytest.mark.parametrize(
-    "attention_type, expected_config_str, expected_module_str",
+    "attention_type, expected_config_str",
     [
-        (AttentionType.CAUSAL, "CausalSelfAttentionConfig", "CausalSelfAttention"),
-        (AttentionType.STANDARD, "AttentionConfig", "ScaledDotProductSelfAttention"),
+        (AttentionType.CAUSAL, "CausalSelfAttentionConfig"),
+        (AttentionType.STANDARD, "AttentionConfig"),
     ],
 )
-def test_get_attention_classes(attention_type: AttentionType, expected_config_str: str, expected_module_str: str):
-    with patch(
-        f"pytorch_model_commons.model.configs.transformer.block_configs.{expected_config_str}"
-    ) as MockConfig, patch(
-        f"pytorch_model_commons.model.configs.transformer.block_configs.{expected_module_str}"
-    ) as MockAttentionModule:
-        config_class, module_class = get_attention_classes(attention_type)
+def test_get_attention_config_class(attention_type: AttentionType, expected_config_str: str):
+    with patch(f"pytorch_model_commons.model.configs.transformer.block_configs.{expected_config_str}") as MockConfig:
+        config_class = get_attention_config_class(attention_type=attention_type)
 
         assert config_class == MockConfig
-        assert module_class == MockAttentionModule
 
 
-def test_get_attention_classes_invalid():
+def test_get_attention_config_classs_invalid():
     with pytest.raises(ValueError, match="Unsupported attention type"):
-        get_attention_classes("invalid_attention_type")
+        get_attention_config_class(attention_type="invalid_attention_type")
 
 
-@patch("pytorch_model_commons.model.configs.transformer.block_configs.get_attention_classes")
+@patch("pytorch_model_commons.model.configs.transformer.block_configs.get_attention_config_class")
 @patch("pytorch_model_commons.model.configs.transformer.block_configs.dict_to_dataclass")
-def test_transformer_block_config(mock_dict_to_dataclass, mock_get_attention_classes):
+def test_transformer_block_config(mock_dict_to_dataclass, mock_get_attention_config_class):
     mock_0 = Mock()
-    mock_1 = Mock()
-    mock_get_attention_classes.return_value = [mock_0, mock_1]
+    mock_get_attention_config_class.return_value = mock_0
 
     embedding_dim = 128
     num_heads = 2
@@ -55,7 +49,7 @@ def test_transformer_block_config(mock_dict_to_dataclass, mock_get_attention_cla
         attention_type=attention_type,
     )
 
-    mock_get_attention_classes.assert_called_once_with(attention_type=attention_type)
+    mock_get_attention_config_class.assert_called_once_with(attention_type=attention_type)
     mock_dict_to_dataclass.assert_called_once_with(
         dataclass_type=mock_0,
         dict_obj={
@@ -70,5 +64,4 @@ def test_transformer_block_config(mock_dict_to_dataclass, mock_get_attention_cla
     assert result.embedding_dim == embedding_dim
     assert result.resid_drop_p == resid_drop_p
     assert result.attention_type == attention_type.value
-    assert result.attention_module == mock_1
     assert result.attention_config == mock_dict_to_dataclass.return_value

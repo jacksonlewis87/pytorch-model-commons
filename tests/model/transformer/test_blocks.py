@@ -1,6 +1,6 @@
 import pytest
 import torch
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, patch
 
 from pytorch_model_commons.model.transformer.blocks import TransformerBlock
 from pytorch_model_commons.model.configs.transformer.block_configs import TransformerBlockConfig
@@ -20,12 +20,13 @@ def transformer_block_config():
     config.embedding_dim = 512
     config.resid_drop_p = 0.1
     config.attention_config = MagicMock()
-    config.attention_module = DummyAttention
+    config.attention_type = "some-attention-type"
     return config
 
 
 @pytest.fixture
-def transformer_block(transformer_block_config):
+@patch("pytorch_model_commons.model.transformer.blocks.get_attention_module", return_value=DummyAttention)
+def transformer_block(mock_get_attention_module, transformer_block_config):
     return TransformerBlock(config=transformer_block_config)
 
 
