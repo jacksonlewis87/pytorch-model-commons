@@ -7,3 +7,5 @@ class DataConfig:
     batch_size: int
     train_size: float
     data_split_path: str
+    num_workers: int
+    prefetch_factor: int
