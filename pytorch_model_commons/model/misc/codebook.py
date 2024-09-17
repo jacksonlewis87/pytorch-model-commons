@@ -42,17 +42,9 @@ class Codebook(nn.Module):
         """
         Forward pass through the codebook layer.
 
-        This method performs the following steps:
-        1. Permutes and reshapes the input tensor `z` to match the embedding dimension.
-        2. Computes the distance between input vectors and codebook vectors.
-        3. Finds the nearest codebook vector for each input vector.
-        4. Calculates the loss as the mean squared error between the quantized vectors and the input, with regularization.
-        5. Updates the quantized vectors with the codebook vectors while detaching the gradient.
-
         Parameters:
-            z (torch.Tensor): Input tensor of shape (B, C, H, W), where B is the batch size, C is the number of channels,
-                              H and W are the height and width of the spatial dimensions. This tensor represents the input
-                              to be quantized.
+            z (torch.Tensor): Input tensor of shape (B, T, E), where B is the batch size, T is the sequence length,
+                              and E is the embedding dimension. This tensor represents the input to be quantized.
 
         Returns:
             tuple:
@@ -62,15 +54,15 @@ class Codebook(nn.Module):
                 - loss (torch.Tensor): Scalar tensor representing the quantization loss, which is a combination of reconstruction
                   loss and codebook loss.
         """
-        # Permute and reshape the input tensor
-        z = z.permute(0, 2, 3, 1).contiguous()
+        # Shape of z: (B, T, E)
+        # Flatten z to shape (B * T, E) for distance computation
         z_flattened = z.view(-1, self.embedding_dim)
 
         # Compute the distances between input vectors and codebook vectors
         d = (
             torch.sum(z_flattened**2, dim=1, keepdim=True)
             + torch.sum(self.embedding.weight**2, dim=1)
-            - 2 * (torch.matmul(z_flattened, self.embedding.weight.t()))
+            - 2 * torch.matmul(z_flattened, self.embedding.weight.t())
         )
 
         # Find the indices of the nearest codebook vectors
@@ -82,6 +74,5 @@ class Codebook(nn.Module):
 
         # Update quantized tensor with codebook vectors while detaching the gradient
         z_q = z + (z_q - z).detach()
-        z_q = z_q.permute(0, 3, 1, 2)
 
         return z_q, min_encoding_indices, loss
