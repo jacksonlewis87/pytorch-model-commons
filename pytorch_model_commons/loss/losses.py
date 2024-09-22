@@ -5,15 +5,16 @@ import torch.nn as nn
 class GPTLoss(nn.Module):
     def __init__(self):
         super(GPTLoss, self).__init__()
-        self.loss_fn = nn.CrossEntropyLoss()
+        self.loss_fn = nn.CrossEntropyLoss(reduction="none")
 
-    def forward(self, logits: torch.Tensor, input_ids: torch.Tensor) -> torch.Tensor:
+    def forward(self, logits: torch.Tensor, input_ids: torch.Tensor, mask: torch.Tensor) -> torch.Tensor:
         """
         Compute the loss given the logits and the input sequence.
 
         Parameters:
             logits (torch.Tensor): Logits from the model of shape (B, T, vocab_size).
             input_ids (torch.Tensor): Input token indices of shape (B, T).
+            mask (torch.Tensor): Boolean mask of shape (B, T).
 
         Returns:
             torch.Tensor: The computed loss.
@@ -29,5 +30,5 @@ class GPTLoss(nn.Module):
         targets = targets.view(-1)  # Flatten to (B * (T-1))
 
         # Compute the loss
-        loss = self.loss_fn(shifted_logits, targets)
-        return loss
+        losses = self.loss_fn(shifted_logits, targets) * mask.flatten()
+        return losses.sum() / mask.sum()
